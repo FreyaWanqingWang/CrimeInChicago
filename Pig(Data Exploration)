@@ -1,0 +1,16 @@
+CrimeData = LOAD 'hdfs://cluster-82f3-m/Assignment2/Chicago_Crimes_2012_to_2017.csv' using PigStorage(',')  as (Index, ID, CaseNumber, Date, Block, IUCR,PrimaryType, Description, LocationDescription, Arrest,Domestic, Beat, District, Ward, CommunityArea, FBICode,XCoordinate, YCoordinate, Year, UpdatedOn, Latitude,Longitude, Location);
+
+GroupCrimetype = GROUP CrimeData BY PrimaryType; GroupTypeSum = FOREACH  GroupCrimetype  GENERATE group as PrimaryType, COUNT(CrimeData.ID) as CrimeCount;
+GroupTypeRank = RANK GroupTypeSum by CrimeCount DESC; Top10GroupType = LIMIT GroupTypeRank 10; 
+DUMP Top10GroupType;
+
+
+GroupBlock = GROUP CrimeData BY Block;
+GroupBlockSum = FOREACH  GroupBlock  GENERATE group as BlockStreet, COUNT(CrimeData.ID) as BlockCount;
+GroupBlockRank = RANK GroupBlockSum by BlockCount DESC; Top10GroupBlock = LIMIT GroupBlockRank 10; 
+DUMP Top10GroupBlock;
+
+
+GroupArrest = GROUP CrimeData BY Arrest;
+GroupArrestSum = FOREACH  GroupArrest  GENERATE group as ArrestType, COUNT(CrimeData.ID) as ArrestCount;
+DUMP GroupArrestSum;
