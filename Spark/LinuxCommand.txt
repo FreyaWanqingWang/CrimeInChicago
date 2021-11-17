@@ -1,0 +1,12 @@
+//create directory
+zhe_wang23@cluster-cd23-m:~$ hdfs dfs -mkdir /user/crimedata
+
+//copy fill from google storage to HDFS
+zhe_wang23@cluster-cd23-m:~$ hdfs dfs -cp gs://hive-test1/cirme/crime.csv /user/crimedata
+zhe_wang23@cluster-cd23-m:~$ hdfs dfs -ls /user/crimedata
+
+//See if the processed csv file is saved to hdfs
+zhe_wang23@cluster-cd23-m:~$ hdfs dfs -ls /user/crimedata/
+
+//export csv files from HDFS to google storage
+zhe_wang23@cluster-cd23-m:~$ hadoop fs -cp /user/crimedata/newcrime.csv/  gs://hive-test1/cirme
