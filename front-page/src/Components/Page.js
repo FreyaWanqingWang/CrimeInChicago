@@ -7,7 +7,6 @@ import {
     ListItem, ListItemText, CssBaseline
 } from '@material-ui/core';
 import echarts from 'echarts';
-import 'echarts/map/js/province/tianjin';
 import {AllData} from "./AllData";
 import Map from "./Map"
 
